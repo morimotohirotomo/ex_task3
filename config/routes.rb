@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'home#top'
   get 'home/about'
-  resources :books
+  resources :books do
+    resource :book_comments, only: [:create, :destroy]
+  	resource :favorites, only: [:create, :destroy]
+  end
   devise_for :users, controllers: {
 	sessions: 'users/sessions',
 	registrations: 'users/registrations'
